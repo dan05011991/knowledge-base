@@ -129,6 +129,7 @@
           content : $("#entry-markdown").val(),
           meta_title : $("#entry-metainfo-title").val(),
           meta_description : $("#entry-metainfo-description").val(),  
+          meta_group : $("#entry-metainfo-group").val(),  
           meta_sort : $("#entry-metainfo-sort").val(),  
         }, function (data) {
           switch (data.status) {

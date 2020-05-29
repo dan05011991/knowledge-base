@@ -13,6 +13,12 @@ async function handler (filePath, config) {
 
   try {
     const file = await fs.readFile(filePath);
+    const meta = contentProcessors.processMeta(file.toString('utf-8'));
+
+    if(!meta.group || meta.group !== 'GROUP') {
+      return null;
+    }
+
     let slug = utils.getSlug(filePath, contentDir);
 
     if (slug.indexOf('index.md') > -1) {
@@ -20,7 +26,6 @@ async function handler (filePath, config) {
     }
     slug = slug.replace('.md', '').trim();
 
-    const meta = contentProcessors.processMeta(file.toString('utf-8'));
     const content = contentProcessors.processVars(
       contentProcessors.stripMeta(file.toString('utf-8')),
       config
@@ -28,13 +33,14 @@ async function handler (filePath, config) {
 
     const body = marked(content);
     const title = meta.title ? meta.title : contentProcessors.slugToTitle(slug);
+
     const excerpt = _s.prune(_s.stripTags(_s.unescapeHTML(body)), (config.excerpt_length || 400));
 
     return { slug, title, body, excerpt };
 
   } catch (e) {
     if (config.debug) {
-      console.log(e);
+      console.log('ERROR', e);
     }
     return null;
   }

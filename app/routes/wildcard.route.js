@@ -88,6 +88,13 @@ function route_wildcard (config) {
 
       var pageList = remove_image_content_directory(config, await contentsHandler(slug, config));
 
+      pageList = pageList.filter(x => {
+        if(x.is_directory) {
+          return x.files.length > 0;
+        }
+        return true;
+      });
+
       var loggedIn = ((config.authentication || config.authentication_for_edit) ? req.session.loggedIn : false);
 
       var canEdit = false;

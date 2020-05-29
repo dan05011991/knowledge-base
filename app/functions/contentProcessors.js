@@ -120,7 +120,8 @@ async function extractDocument (contentDir, filePath, debug) {
 
     const id    = filePath.replace(contentDir, '').trim();
     const title = meta.title ? meta.title : slugToTitle(id);
-    const body  = file.toString('utf-8');
+    
+    const body  = meta.group && meta.group === 'GROUP' ? file.toString('utf-8') : 'NO!!!!!!!!!!!!!!!!';
 
     return { id, title, body }
   } catch (e) {

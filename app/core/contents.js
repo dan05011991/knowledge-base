@@ -118,6 +118,10 @@ async function processFile (config, activePageSlug, contentDir, filePath) {
 
       const meta = contentProcessors.processMeta(file.toString('utf-8'));
 
+      if(!meta.group || meta.group !== 'GROUP') {
+        return null;
+      }
+
       if (page_sort_meta && meta[page_sort_meta]) {
         pageSort = parseInt(meta[page_sort_meta], 10);
       }

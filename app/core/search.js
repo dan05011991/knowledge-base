@@ -60,6 +60,11 @@ async function handler (query, config) {
 
 async function processSearchResult (contentDir, config, query, result) {
   const page = await pageHandler(contentDir + result.ref, config);
+  
+  if(!page) {
+    return null;
+  }
+
   page.excerpt = page.excerpt.replace(new RegExp('(' + query + ')', 'gim'), '<span class="search-query">$1</span>');
 
   return page;

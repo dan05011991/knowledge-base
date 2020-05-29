@@ -7,7 +7,7 @@ var path = require('path');
 var config = {
 
   // Your site title (format: page_title - site_title)
-  site_title: 'Raneto Docs',
+  site_title: 'B&P Knowledge Base',
 
   // The base URL of your site (can use %base_url% in Markdown files)
   base_url: '',
@@ -16,7 +16,7 @@ var config = {
   support_email: '',
 
   // Footer Text / Copyright
-  copyright: 'Copyright &copy; ' + new Date().getFullYear() + ' - <a href="http://raneto.com">Powered by Raneto</a>',
+  copyright: 'Copyright &copy; ' + new Date().getFullYear(),
 
   // Excerpt length (used in search)
   excerpt_length: 400,
@@ -77,7 +77,7 @@ var config = {
 
   credentials    : [
     {
-      username : 'admin',
+      username : 'testuser',
       password : 'password'
     },
     {

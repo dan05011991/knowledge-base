@@ -18,6 +18,7 @@
   "api": {
     "loginSuccessful"   : "Login Successful",
     "invalidCredentials": "Invalid Username/Password Combination",
+    "invalidPermissions": "You do not have the correct permissions",
     "pageSaved"         : "Page Saved",
     "pageDeleted"       : "Page Deleted",
     "categoryCreated"   : "Category Created",
@@ -36,6 +37,7 @@
     "headerMetaInfo" : "Meta information",
     "lableMetaTitle": "Title",
     "lableMetaDescription": "Description",
+    "labelGroup": "Group",
     "lableMetaSort": "Sort"
   },
 
