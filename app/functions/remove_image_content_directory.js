@@ -8,7 +8,13 @@ function remove_image_content_directory (config, pageList) {
       pageList.splice(i, 1);
     }
   }
-  return pageList;
+  // Filter out the directories with no files in them
+  return pageList.filter(x => {
+    if(x.is_directory) {
+      return x.files.length > 0;
+    }
+    return true;
+  });
 }
 
 // Exports

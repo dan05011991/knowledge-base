@@ -39,15 +39,8 @@ function route_home (config) {
 
     // Filter out the image content directory and items with show_on_home == false
     var pageList = remove_image_content_directory(config,
-      _.chain(await contentsHandler('/index', config))
-        .filter(x => x != null)
+      _.chain(await contentsHandler('/index', req.session.groups, config))
         .filter(page => { return page.show_on_home; })
-        .filter(x => {
-          if(x.is_directory) {
-            return x.files.length > 0;
-          }
-          return true;
-        })
         .map(function (page) {
           page.files = _.filter(page.files, function (file) { return file.show_on_home; });
           return page;

@@ -25,18 +25,11 @@ function route_search (config) {
     // trim and convert to string
     var searchQuery    = sanitizedQuery.toString(sanitizedQuery).trim();
 
-    var searchResults  = await searchHandler(searchQuery, config);
-    var pageListSearch = remove_image_content_directory(config, await contentsHandler(null, config));
+    var searchResults  = await searchHandler(searchQuery, req.session.groups, config);
+    var pageListSearch = remove_image_content_directory(config, await contentsHandler(null, req.session.groups, config));
 
     // TODO: Move to Raneto Core
     // Loop through Results and Extract Category
-    pageListSearch = pageListSearch.filter(x => {
-      if(x.is_directory) {
-        return x.files.length > 0;
-      }
-      return true;
-    });
-
     searchResults.filter(x => x !== null).forEach(function (result) {
       result.category = null;
       var split = result.slug.split('/');

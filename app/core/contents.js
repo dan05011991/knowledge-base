@@ -8,8 +8,9 @@ const _s                = require('underscore.string');
 const yaml              = require('js-yaml');
 const utils             = require('./utils');
 const contentProcessors = require('../functions/contentProcessors');
+const roleHandler       = require('../functions/roles');
 
-async function handler (activePageSlug, config) {
+async function handler (activePageSlug, userRoles, config) {
   activePageSlug = activePageSlug || '';
   const baseSlug = activePageSlug.split(/[\\/]/).slice(0, -1).join('/');
   const contentDir = utils.normalizeDir(path.normalize(config.content_dir));
@@ -29,7 +30,7 @@ async function handler (activePageSlug, config) {
   });
 
   const results = await Promise.all(
-    files.map(filePath => processFile(config, activePageSlug, contentDir, filePath))
+    files.map(filePath => processFile(userRoles, config, activePageSlug, contentDir, filePath))
   );
 
   for (const result of results) {
@@ -50,7 +51,7 @@ async function handler (activePageSlug, config) {
   return sortedFiles;
 }
 
-async function processFile (config, activePageSlug, contentDir, filePath) {
+async function processFile (userRoles, config, activePageSlug, contentDir, filePath) {
   const content_dir = path.normalize(contentDir);
   const page_sort_meta = config.page_sort_meta || '';
   const category_sort = config.category_sort || false;
@@ -118,7 +119,7 @@ async function processFile (config, activePageSlug, contentDir, filePath) {
 
       const meta = contentProcessors.processMeta(file.toString('utf-8'));
 
-      if(!meta.group || meta.group !== 'GROUP') {
+      if(!roleHandler.isAllowedContent(meta.group, userRoles, config)) {
         return null;
       }
 

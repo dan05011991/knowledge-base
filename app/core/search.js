@@ -29,7 +29,7 @@ function getStemmers (config) {
   return stemmers;
 }
 
-async function handler (query, config) {
+async function handler (query, userRoles, config) {
   const contentDir = utils.normalizeDir(path.normalize(config.content_dir));
   const rawDocuments = await utils.promiseGlob(contentDir + '**/*.md');
   const potentialDocuments = await Promise.all(
@@ -52,14 +52,14 @@ async function handler (query, config) {
   const results = idx.search(query);
 
   const searchResults = await Promise.all(
-    results.map(result => processSearchResult(contentDir, config, query, result))
+    results.map(result => processSearchResult(contentDir, userRoles, config, query, result))
   );
 
   return searchResults;
 }
 
-async function processSearchResult (contentDir, config, query, result) {
-  const page = await pageHandler(contentDir + result.ref, config);
+async function processSearchResult (contentDir, userRoles, config, query, result) {
+  const page = await pageHandler(contentDir + result.ref, userRoles, config);
   
   if(!page) {
     return null;

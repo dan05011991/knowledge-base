@@ -53,7 +53,7 @@
             break;
         }
       }).fail(function(data) {
-        if (data.status === 403) { window.location = base_url + "/login"; }
+        if (data.status === 307) { window.location = base_url + "/login"; }
       });
     });
 
@@ -72,7 +72,7 @@
             break;
         }
       }).fail(function(data) {
-        if (data.status === 403) { window.location = base_url + "/login"; }
+        if (data.status === 307) { window.location = base_url + "/login"; }
       });
     });
 
@@ -101,7 +101,7 @@
         }, function (data) {
           location.reload();
         }).fail(function(data) {
-        if (data.status === 403) { window.location = base_url + "/login"; }
+        if (data.status === 307) { window.location = base_url + "/login"; }
       });
       }
     });
@@ -151,7 +151,7 @@
               break;
           }
         }).fail(function(data) {
-          if (data.status === 403) { window.location = base_url + "/login"; }
+          if (data.status === 307) { window.location = base_url + "/login"; }
         });
       });
 

@@ -63,7 +63,13 @@ var config = {
   authentication_for_edit: true,
 
   // If authentication is enabled, set this to true to enable authentication for reading too
-  authentication_for_read: false,
+  authentication_for_read: true,
+
+  // Group required for login to be allowed
+  login_group: 'admins',
+
+  // Group for more restricted items
+  restricted: 'cooldudes',
 
   // Google OAuth
   googleoauth: false,

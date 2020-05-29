@@ -41,21 +41,5 @@ function route_login (config) {
   };
 }
 
-function success(req, res, config) {
-  req.session.loggedIn = true;
-  req.session.username = config.credentials[i].username;
-  res.json({
-    status  : 1,
-    message : config.lang.api.loginSuccessful
-  });
-}
-
-function reject(res, flag) {
-  res.json({
-    status  : 0,
-    message : flag
-  });
-}
-
 // Exports
 module.exports = route_login;

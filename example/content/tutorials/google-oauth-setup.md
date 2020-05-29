@@ -75,14 +75,14 @@ else {
 ```
 
 ### Editing the `app/middleware/authenticate.js` file
-Change the `res.redirect(403, '/login');` line to be:
+Change the `res.redirect(307, '/login');` line to be:
 
 ```
 if (config.googleoauth === true) {
   res.redirect('/login');
 }
 else {
-  res.redirect(403, '/login');  
+  res.redirect(307, '/login');  
 }
 ```
 

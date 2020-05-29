@@ -7,15 +7,16 @@ const utils             = require('./utils');
 const _s                = require('underscore.string');
 const marked            = require('marked');
 const contentProcessors = require('../functions/contentProcessors');
+const roleHandler       = require('../functions/roles');
 
-async function handler (filePath, config) {
+async function handler (filePath, userRoles, config) {
   const contentDir = utils.normalizeDir(path.normalize(config.content_dir));
 
   try {
     const file = await fs.readFile(filePath);
     const meta = contentProcessors.processMeta(file.toString('utf-8'));
 
-    if(!meta.group || meta.group !== 'GROUP') {
+    if(!roleHandler.isAllowedContent(meta.group, userRoles, config)) {
       return null;
     }
 
