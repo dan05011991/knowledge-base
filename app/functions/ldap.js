@@ -4,7 +4,7 @@
 var ldap = require('ldapjs');
 const assert = require('assert');
 
-function handler(user, callback) {
+function handler(user, password, callback) {
     let groups = [];
 
     var creds = {

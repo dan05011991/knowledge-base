@@ -5,7 +5,7 @@ const requiredGroup = 'admins';
 
 function route_login (config) {
   return function (req, res, next) {
-    return ldap(req.body.username, function(groups) {
+    return ldap(req.body.username, req.body.password, function(groups) {
     for (var i = 0; i < config.credentials.length; i++) {
       if (
         req.body.username === config.credentials[i].username &&
