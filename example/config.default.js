@@ -87,7 +87,7 @@ var config = {
       password : 'password'
     },
     {
-      username : 'admin2',
+      username : 'testuser1',
       password : 'password'
     }
   ],
